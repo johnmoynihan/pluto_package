@@ -18,3 +18,7 @@ __pycache__/
 
 *.png
 *.pdf
+
+*.nc
+
+*.csv
