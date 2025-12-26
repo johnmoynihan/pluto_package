@@ -63,7 +63,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
     transit_name = "kepler9c"
 
     ### import short
-    lc_dir_real_short = Path("/Users/johnnymoynihan/Downloads/kepler9_short.csv")
+    lc_dir_real_short = Path("/pluto_package/Data/kepler9_short.csv")
     df_short = pd.read_csv(lc_dir_real_short)
     time_short = df_short['time'].values
     flux_short = df_short['flux'].values
@@ -80,7 +80,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
 
     ### import long
-    lc_dir_real_long = Path("/Users/johnnymoynihan/Downloads/kepler9_long.csv")
+    lc_dir_real_long = Path("/pluto_package/Data/kepler9_long.csv")
     df_long = pd.read_csv(lc_dir_real_long)
     time_long = df_long['time'].values
     flux_long = df_long['flux'].values
@@ -121,7 +121,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
 
         
-    tmids_outerdf_path = Path("/Users/johnnymoynihan/Downloads/kepler9_holczer_outer.csv")
+    tmids_outerdf_path = Path("/pluto_package/Data/kepler9_holczer_outer.csv")
     tmids_outer_df = pd.read_csv(tmids_outerdf_path)
     tmids_outer = tmids_outer_df['tmid']
     tmids_lineph_outer = tmids_outer_df['tn']
@@ -391,7 +391,11 @@ def main():
 
 
     # #save results
-    # with open("mcmc_curves_kepler9c.pkl", "wb") as f:
+    #  outdir = Path("/pluto_package/Outputs")
+    #  outdir.mkdir(parents=True, exist_ok=True)
+
+    #   outfile = outdir / "datainfo_kepler9c.pkl"
+    # with open(outfile, "wb") as f:
     #     pickle.dump({
     #         "info": info,
     #         "curves" : info["curves"],

@@ -288,7 +288,10 @@ def extract_info_superprof(sampler_superprof, curves, info): #function to extrac
             if bad_vars:
                 setattr(idata, group, ds.drop_vars(bad_vars))
 
-    idata.to_netcdf(f"arviz_{transit_name}_nonlinear.nc")
+    outdir = Path("/pluto_package/Outputs")
+    outdir.mkdir(parents=True, exist_ok=True)
+    outfile = outdir / f"arviz_{transit_name}_nonlinear.nc"
+    idata.to_netcdf(outfile)
 
 
 

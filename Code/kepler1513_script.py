@@ -78,7 +78,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
     transit_name = "kepler1513"
 
-    lc_dir_real = Path("/Users/johnnymoynihan/Downloads/kepler1513_for_john/kepler1513_undetrended_kepler_pdc.csv")
+    lc_dir_real = Path("/pluto_package/Data/kepler1513_undetrended_kepler_pdc.csv")
     df = pd.read_csv(lc_dir_real)
     time = df['time'].values
     flux = df['flux'].values
@@ -337,7 +337,15 @@ def main():
 
 
     #save results
-    with open("datainfo_kepler1513.pkl", "wb") as f:
+
+
+    outdir = Path("/pluto_package/Outputs")
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    outfile = outdir / "datainfo_kepler1513.pkl"
+
+
+    with open(outfile, "wb") as f:
         pickle.dump({
             "info": info,
             "nonlinear_results": nonlinear_results,
