@@ -1,0 +1,9 @@
+numpy
+pandas
+scipy
+matplotlib
+emcee
+batman-package
+corner
+multiprocess
+tqdm
