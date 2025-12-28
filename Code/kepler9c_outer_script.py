@@ -63,7 +63,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
     transit_name = "kepler9c"
 
     ### import short
-    lc_dir_real_short = Path("/pluto_package/Data/kepler9_short.csv")
+    lc_dir_real_short = Path("../Data/kepler9_short.csv")
     df_short = pd.read_csv(lc_dir_real_short)
     time_short = df_short['time'].values
     flux_short = df_short['flux'].values
@@ -80,7 +80,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
 
     ### import long
-    lc_dir_real_long = Path("/pluto_package/Data/kepler9_long.csv")
+    lc_dir_real_long = Path("../Data/kepler9_long.csv")
     df_long = pd.read_csv(lc_dir_real_long)
     time_long = df_long['time'].values
     flux_long = df_long['flux'].values
@@ -121,7 +121,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
 
         
-    tmids_outerdf_path = Path("/pluto_package/Data/kepler9_holczer_outer.csv")
+    tmids_outerdf_path = Path("../Data/kepler9_holczer_outer.csv")
     tmids_outer_df = pd.read_csv(tmids_outerdf_path)
     tmids_outer = tmids_outer_df['tmid']
     tmids_lineph_outer = tmids_outer_df['tn']
@@ -147,7 +147,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
 
        
-
+        if i == 18: continue
         if i == 20: continue
         if i == 21: continue
         
@@ -261,9 +261,9 @@ def create_info(data_info, curves): #create info dictionary for algorithm
     tot_betas = ncurves * beta_num #total number of betas, this is the number of beta parameters walked over in the vanilla mcmc
 
     #set mcmc info
-    mcmcpoints = 40000 #set number of points to test
+    mcmcpoints = 100000 #set number of points to test
     thin = 10 #set thin
-    burnin = 30000#set burnin
+    burnin = 50000#set burnin
 
 
     mcmcpoints_van = 59000
@@ -358,17 +358,17 @@ def main():
     print("creating algorithm info dictionary")
     info = create_info(data_info, curves)
 
-    # #precompute info
-    # print("precomputing curve info")
-    # precompute_function(curves, info)
+    #precompute info
+    print("precomputing curve info")
+    precompute_function(curves, info)
     
-    # #run super profile MCMC
-    # print("running super Profile Likelihood MCMC")
-    # superprof_sampler, samples = run_superprofile_mcmc(curves, info)
-    # nonlinear_results  = extract_info_superprof(superprof_sampler, curves, info)
-    # print("Profilelikelihood MCMC complete")
+    #run non-linear MCMC
+    print("running super Profile Likelihood MCMC")
+    superprof_sampler, samples = run_superprofile_mcmc(curves, info)
+    nonlinear_results  = extract_info_superprof(superprof_sampler, curves, info)
+    print("Profilelikelihood MCMC complete")
 
-    # # #run mini profile mcmc
+    # # #run linear mcmc
     # # print("running mini Profile Likelihood MCMC")
     # # miniprof_sampler, mini_samples = run_miniprofile_mcmc(curves, info)
     # # linear_results   = extract_info_miniprof(miniprof_sampler, curves, info)
@@ -390,19 +390,19 @@ def main():
     # psi_plotting(info, nonlinear_results, which = ["nonlinear"])
 
 
-    # #save results
-    #  outdir = Path("/pluto_package/Outputs")
-    #  outdir.mkdir(parents=True, exist_ok=True)
+    #save results
+    outdir = Path("../Outputs")
+    outdir.mkdir(parents=True, exist_ok=True)
 
-    #   outfile = outdir / "datainfo_kepler9c.pkl"
-    # with open(outfile, "wb") as f:
-    #     pickle.dump({
-    #         "info": info,
-    #         "curves" : info["curves"],
-    #         "nonlinear_results": nonlinear_results,
-    #         # "linear_results": linear_results,
-    #         #"vanilla_results": vanilla_results,
-    #         }, f,)
+    outfile = outdir / "datainfo_kepler9c.pkl"
+    with open(outfile, "wb") as f:
+        pickle.dump({
+            "info": info,
+            "curves" : info["curves"],
+            "nonlinear_results": nonlinear_results,
+            # "linear_results": linear_results,
+            #"vanilla_results": vanilla_results,
+            }, f,)
 
         
 

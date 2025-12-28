@@ -78,7 +78,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
     transit_name = "kepler1513"
 
-    lc_dir_real = Path("/pluto_package/Data/kepler1513_undetrended_kepler_pdc.csv")
+    lc_dir_real = Path("../Data/kepler1513_undetrended_kepler_pdc.csv")
     df = pd.read_csv(lc_dir_real)
     time = df['time'].values
     flux = df['flux'].values
@@ -209,8 +209,8 @@ def create_info(data_info): #create info dictionary for algorithm
     burnin = 250000#set burnin
 
 
-    mcmcpoints_van = 500000
-    burnin_van = 400000
+    mcmcpoints_van = 350000
+    burnin_van = 200000
 
 
     # region: organize info  
@@ -339,7 +339,7 @@ def main():
     #save results
 
 
-    outdir = Path("/pluto_package/Outputs")
+    outdir = Path("../Outputs")
     outdir.mkdir(parents=True, exist_ok=True)
 
     outfile = outdir / "datainfo_kepler1513.pkl"
@@ -357,7 +357,7 @@ def main():
 
         
 
-        return
+    return
 
 if __name__ == "__main__":
     main()

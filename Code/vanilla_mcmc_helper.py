@@ -268,8 +268,11 @@ def extract_info_vanilla(sampler_van, curves, info): #function to extract result
             if bad_vars:
                 setattr(idata, group, ds.drop_vars(bad_vars))
 
-    idata.to_netcdf(f"arviz_{transit_name}_vanilla.nc")
-
+    outdir = Path("../Outputs")
+    outdir.mkdir(parents=True, exist_ok=True)
+    outfile = outdir / idata.to_netcdf(f"arviz_{transit_name}_vanilla.nc")
+    idata.to_netcdf(outfile)
+    print("saved vanilla file")
 
     ### extract results
     flat_samples_van = sampler_van.get_chain(flat = True, discard = burnin, thin=thin) #get flatchain, shape is (# of points, # of theta)

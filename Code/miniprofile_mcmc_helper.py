@@ -240,7 +240,10 @@ def extract_info_miniprof(sampler_miniprof, curves, info):
             if bad_vars:
                 setattr(idata, group, ds.drop_vars(bad_vars))
 
-    idata.to_netcdf(f"arviz_{transit_name}_linear.nc")
+    outdir = Path("../Outputs")
+    outdir.mkdir(parents=True, exist_ok=True)
+    outfile = outdir / idata.to_netcdf(f"arviz_{transit_name}_linear.nc")
+    idata.to_netcdf(outfile)
 
     #extract results
     samples_miniprof = sampler_miniprof.get_chain(discard=burnin, flat=True, thin=thin) 
@@ -318,3 +321,5 @@ def extract_info_miniprof(sampler_miniprof, curves, info):
     }           
 
     return linear_mcmc_results
+
+

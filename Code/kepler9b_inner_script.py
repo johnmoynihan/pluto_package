@@ -63,7 +63,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
     transit_name = "kepler9b"
 
     ### import short
-    lc_dir_real_short = Path("/pluto_package/Data/kepler9_short.csv")
+    lc_dir_real_short = Path("../Data/kepler9_short.csv")
     df_short = pd.read_csv(lc_dir_real_short)
     time_short = df_short['time'].values
     flux_short = df_short['flux'].values
@@ -80,7 +80,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
 
     ### import long
-    lc_dir_real_long = Path("/pluto_package/Data/kepler9_long.csv")
+    lc_dir_real_long = Path("../Data/kepler9_long.csv")
     df_long = pd.read_csv(lc_dir_real_long)
     time_long = df_long['time'].values
     flux_long = df_long['flux'].values
@@ -121,7 +121,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
 
 
 
-    tmids_df_path = Path("/pluto_package/Data/kepler9_holczer_inner.csv")
+    tmids_df_path = Path("../Data/kepler9_holczer_inner.csv")
     tmids_df = pd.read_csv(tmids_df_path)
     tmids = tmids_df['tmid']
     tmids_lineph = tmids_df['tn']
@@ -388,7 +388,7 @@ def main():
 
 
     #save results
-    outdir = Path("/pluto_package/Outputs")
+    outdir = Path("../Outputs")
     outdir.mkdir(parents=True, exist_ok=True)
 
     outfile = outdir / "datainfo_kepler9b.pkl"
