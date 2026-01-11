@@ -130,7 +130,7 @@ def load_data(show=True): #function to input lightcurves, load curves dictionary
     #filter individual lightcurves for planet c 
 
     transit_duration = 0.15927
-    period = 19.2259
+    period = 19.247
     halfperiod = period / 2
     cushion = 3 * transit_duration
 
